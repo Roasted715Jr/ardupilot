@@ -44,7 +44,7 @@ extern const AP_HAL::HAL& hal;
  */
 void RCOutput::set_bidir_dshot_mask(uint32_t mask)
 {
-#if HAL_WITH_IO_MCU_BIDIR_DSHOT
+#ifdef HAL_WITH_IO_MCU_BIDIR_DSHOT
     const uint32_t iomcu_mask = ((1U<<chan_offset)-1);
     if (iomcu_dshot && (mask & iomcu_mask)) {
         iomcu.set_bidir_dshot_mask(mask & iomcu_mask);

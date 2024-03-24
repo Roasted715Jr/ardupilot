@@ -117,7 +117,7 @@ void AP_IOMCU::thread_main(void)
     uart.begin(1500*1000, 128, 128);
     uart.set_unbuffered_writes(true);
 
-#if HAL_WITH_IO_MCU_BIDIR_DSHOT
+#ifdef HAL_WITH_IO_MCU_BIDIR_DSHOT
     AP_BLHeli* blh = AP_BLHeli::get_singleton();
     uint16_t erpm_period_ms = 10; // default 100Hz
     if (blh && blh->get_telemetry_rate() > 0) {
@@ -318,7 +318,7 @@ void AP_IOMCU::thread_main(void)
             read_servo();
             last_servo_read_ms = AP_HAL::millis();
         }
-#if HAL_WITH_IO_MCU_BIDIR_DSHOT
+#ifdef HAL_WITH_IO_MCU_BIDIR_DSHOT
         if (AP_BoardConfig::io_dshot() && now - last_erpm_read_ms > erpm_period_ms) {
             // read erpm at configured rate. A more efficient scheme might be to 
             // send erpm info back with the response from a PWM send, but that would
@@ -398,7 +398,7 @@ void AP_IOMCU::read_rc_input()
     }
 }
 
-#if HAL_WITH_IO_MCU_BIDIR_DSHOT
+#ifdef HAL_WITH_IO_MCU_BIDIR_DSHOT
 /*
   read dshot erpm
  */
